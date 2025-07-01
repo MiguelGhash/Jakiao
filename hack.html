@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dancing Parrot 🦜</title>
+    <style>
+        body {
+            background: #000;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            padding: 20px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .terminal {
+            background: #000;
+            border: 2px solid #00ff00;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .terminal-header {
+            color: #00ff00;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .parrot-container {
+            text-align: center;
+            line-height: 1.2;
+            font-size: 14px;
+            white-space: pre;
+            animation: rainbow 3s linear infinite;
+        }
+
+        @keyframes rainbow {
+            0% { color: #ff0000; }
+            14% { color: #ff7f00; }
+            28% { color: #ffff00; }
+            42% { color: #00ff00; }
+            57% { color: #0000ff; }
+            71% { color: #4b0082; }
+            85% { color: #9400d3; }
+            100% { color: #ff0000; }
+        }
+
+        .parrot-frame {
+            display: none;
+            animation: bounce 0.5s ease-in-out infinite alternate;
+        }
+
+        .parrot-frame.active {
+            display: block;
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0px) rotate(-2deg); }
+            100% { transform: translateY(-10px) rotate(2deg); }
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #00ff00;
+            font-size: 12px;
+        }
+
+        .glow {
+            text-shadow: 0 0 10px currentColor;
+        }
+
+        /* Efecto de parpadeo para simular terminal */
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .cursor {
+            animation: blink 1s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="terminal">
+        <div class="terminal-header glow">
+            🦜 HAS SIDO JAKIADO 🦜
+        </div>
+        
+        <div class="parrot-container">
+            <div class="parrot-frame active" id="frame1">                         ..---..
+                      .-'       '-.
+                     /             \
+                    |               |
+                    |,  .-.  .-.  ,|
+                    | )(__/  \__)( |
+                    |/     /\     \|
+          (@_       (_     ^^     _)
+     _     ) \_______\__|IIIIII|__/________________________
+    (_)@8@8{}<________|-\IIIIII/-|___________________      >
+           )_/        \          /                   ^^^^^^^^^^^
+          (@           `--------`</div>
+
+            <div class="parrot-frame" id="frame2">                         ..---..
+                      .-'       '-.
+                     /             \
+                    |               |
+                    |,  .-.  .-.  ,|
+                    | )(__/  \__)( |
+                    |/     /\     \|
+                    (_     ^^     _)
+          _          \__|IIIIII|__/________________________
+         (_)@8@8{}<________|-\IIIIII/-|___________________      >
+                  \_/       \          /                   ^^^^^^^^^^^
+                   @         `--------`</div>
+
+            <div class="parrot-frame" id="frame3">                         ..---..
+                      .-'       '-.
+                     /             \
+                    |               |
+                    |,  .-.  .-.  ,|
+                    | )(__/  \__)( |
+                    |/     /\     \|
+                    (_     ^^     _)
+                     \__|IIIIII|__/________________________
+        (@_     _8@8{}<_|-\IIIIII/-|___________________      >
+       (_)@8@8{}          \          /                   ^^^^^^^^^^^
+                           `--------`</div>
+
+            <div class="parrot-frame" id="frame4">                         ..---..
+                      .-'       '-.
+                     /             \
+                    |               |
+                    |,  .-.  .-.  ,|
+                    | )(__/  \__)( |
+                    |/     /\     \|
+                    (_     ^^     _)
+          (@_        \__|IIIIII|__/________________________
+     _     ) \8@8{}<________|-\IIIIII/-|___________________      >
+    (_)@8@8{}/_/            \          /                   ^^^^^^^^^^^
+                             `--------`</div>
+        </div>
+
+        <div class="footer">
+            <span class="glow">¡DOMINIO TOTAL DEL MUNDO!</span>
+            <br>
+            <span class="cursor">█</span>
+        </div>
+    </div>
+
+    <script>
+        let currentFrame = 0;
+        const frames = document.querySelectorAll('.parrot-frame');
+        const totalFrames = frames.length;
+
+        function animateParrot() {
+            // Ocultar todos los frames
+            frames.forEach(frame => frame.classList.remove('active'));
+            
+            // Mostrar el frame actual
+            frames[currentFrame].classList.add('active');
+            
+            // Avanzar al siguiente frame
+            currentFrame = (currentFrame + 1) % totalFrames;
+        }
+
+        // Iniciar animación
+        setInterval(animateParrot, 500);
+
+        // Efecto de colores aleatorios ocasional
+        setInterval(() => {
+            const parrotContainer = document.querySelector('.parrot-container');
+            const colors = ['#ff0000', '#ff7f00', '#ffff00', '#00ff00', '#0000ff', '#4b0082', '#9400d3'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            parrotContainer.style.color = randomColor;
+        }, 2000);
+
+        // Agregar efecto de parpadeo aleatorio
+        setInterval(() => {
+            document.body.style.backgroundColor = Math.random() > 0.95 ? '#001100' : '#000';
+        }, 200);
+    </script>
+</body>
+</html>
